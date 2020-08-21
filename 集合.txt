@@ -1,0 +1,193 @@
+1.集合和数组的区别：
+（1）数组长度不变，集合长度可变
+（2）数组存储的是基本数据类型的元素，集合存储的是引用类型的元素
+（3）数组只能存储同一类型的元素，而集合可以存储不同类型的对象
+
+2.Collection接口
+Collection接口是所有单列集合的父接口，其中定义了操作单列集合（List和Set）的一些方法
+（1）public boolean add（E  e）：把给定的对象添加到当前集合中
+（2）public void clear（）：清空集合中所有的元素
+（3）public boolean remove（E e）：把给定的对象从当前集合中删除
+（4）public boolean contains（E  e）：判断当前集合是否包含给定的对象
+（5）public boolean isEmpty（）：判断当前集合是否为空
+（6）public int size（）：返回集合中元素的个数
+（7）public Object[] toArray（）：把集合中的元素，存储到数组中。
+
+3.Iterator接口：迭代器（对集合进行遍历）
+（1）利用Collection接口中的iterator（）方法，这个方法返回一个Iterator接口的实现类对象,
+Iterator也是有泛型的，它的泛型跟随Collection。
+
+（2）常用的方法：①boolean hasNext（）：判断是否仍有元素
+	            ②E next（）返回迭代的下一个元素（如果集合中没有元素则会抛出异常）
+
+迭代器的使用步骤（重点）：
+①用Iterator接口接收通过集合中的iterator（）方法返回的一个迭代器实现类对象（多态）
+②使用Iterator接口的hasNext（）方法判断是否还有元素
+③使用Iterator接口的next（）方法取出集合中的下一个元素
+
+4.增强for循环（foreach）：专门用来遍历集合（所有的单列集合均可）和数组
+格式：for（集合/数组的数据类型 变量名 ： 集合名/数组名）{
+	sout（变量名）；
+	}
+foreach必须有被遍历的目标，且只能是集合或数组
+
+5.泛型：是一种未知的数据类型，当我们不知道使用什么数据类型时，就是可以使用泛型；
+（1）泛型可以看作一个变量，用来接受数据类型         E e --->Element 元素        T t --->Type 类型
+（2）在创建集合对象时，就会确定泛型的数据类型，会把数据类型作为参数传递，赋值给泛型E。
+
+6.创建集合时，使用泛型和不使用泛型的区别
+（1）不使用泛型（默认为Object类型）
+优势：可以存储任意类型的数据   
+弊端：属于多态写法，使用子类特有的方法时需要向下转型，不安全。
+（2）使用泛型
+优势：①存储的是什么类，输出的就是什么类，避免了转型的麻烦；②把运行期的异常提前到了编译期。
+弊端：创建的是什么类型就只能存储什么类型的数据
+
+7.含有泛型的类、方法和接口的定义和使用
+（1）含有泛型的类定义格式：public class 类名<E>{
+			private E  s;
+			public E getS() {
+        				return s;
+    			}
+
+    			public void setS(E s) {
+        				this.s = s;
+   			}
+		              }
+（2）含有泛型的方法定义格式：public [abstract/static/default]<E>返回值类型 方法名（参数（含有泛型））{
+				方法体
+			}
+（3）含有泛型的接口定义格式（与类相似）public interface 接口名<E>{接口内容}
+①使用含有泛型的接口的第一种情况：定义的实现类也含有泛型
+例：public class 类名<E> implements 实现的接口名<E>{实现类内容}
+②使用含有泛型的接口的第二种情况：定义的实现类不再含有泛型，而是某种具体的数据类型
+例：public class 类名 implements 实现的接口名<String>{实现类内容}
+
+8.泛型的通配符
+*当使用泛型类或接口时，传递的数据中泛型不知道被确定为哪种类型，可以通过通配符<?>表示，
+当用了通配符后，只能使用Object类中的共性方法，元素自身的方法不能再用
+（1）在泛型中没有继承的概念，所以泛型确定为一个父类时，并不能接收它子类的数据
+（2）使用通配符只能接收数据，不能修改数据(只能作为方法的参数使用)
+       例如：ArrayList<?> list = new ArrayList<?>();list.add("aaa")是错误写法
+*受限泛型：泛型可确定的数据类型具有上限和下限（基于继承关系）
+泛型的上限：
+①格式：类型名称  <? extends 类 > 对象名称
+②意义：只能接受该类型及其子类
+泛型的下限：
+①格式：类型名称 <? super 类>对象名称
+②意义：只能接收该类型及其父类
+
+9.集合的数据结构：栈、队列、数组、链表、红黑树
+
+10.List接口：
+特点：
+（1）有序的集合，存储元素和取出元素的顺序是一致的（存储123 取出123）
+（2）有索引，包含了一些带索引的方法
+（3）允许存储重复的元素
+List接口中带索引的方法：
+（1）public void add(int index ,E element):将指定的元素，添加到该集合中的指定位置上。
+（2）public E get(int index):返回集合中指定位置的元素。
+（3）public E remove(int index):移除列表中指定位置的元素，返回的是被移除的元素
+（4）public E set(int index, E element):指定元素替换集合中指定位置的元素，返回的是更新前的元素
+注意：操作索引的时候，一定要防止索引越界异常。
+实现类：ArrayList集合 和 LinkedList集合
+
+11.LinkedList集合：
+特点：
+（1）底层是一个链表结构
+（2）包含了大量操作首尾元素的方法
+注意：使用LinkedList集合特有的方法，不能使用多态
+方法：
+（1）public void addFirst(E e):将指定元素插入此列表的开头。
+（2）public void addLast(E e):将指定元素添加到此列表的结尾。
+（3）public void push(E e):将元素推入此列表所表示的堆栈。
+（4）public E getFirst():返回此列表的第一个元素。
+（5）public E getLast():返回此列表的最后一个元素。
+（6）public E removeFirst():移除并返回此列表的第一个元素。
+（7）public E removeLast():移除并返回此列表的最后一个元素。
+（8）public E pop():从此列表所表示的堆栈处弹出一个元素
+（9）public boolean isEmpty()：如果列表不包含元素，则返回true。
+
+12.Vector集合
+
+13.Set接口的特点：
+（1）不允许存储重复元素
+（2）没有索引，没有带索引的方法，也不能使用普通for循环遍历
+
+14.HashSet集合的特点：
+（1）不允许存储重复的元素
+（2）没有索引，没有带索引的方法，也不能使用普通的for循环遍历
+（3）是一个无序的集合，存储元素和取出元素的顺序有可能不一致
+（4）底层是一个哈希表结构（查询的速度非常的快）
+
+15.哈希表是通过计算元素的哈希值来存储元素（当两个元素的哈希值相同时成为哈希冲突），
+底层由数组+链表/红黑树实现
+
+16.使用HashSet存储自定义类型的元素必须要重写hashcode和equals方法
+才能确保不重复
+
+17.LinkedHashSet集合：底层是一个哈希表（数组+链表/红黑树）+链表，多了
+一条链表（记录元素的存储顺序），保证元素有序
+
+18.可变参数：
+使用前提：当方法的参数列表数据类型已经确定，但是参数的个数个数不确定，就可以使用可变参数
+使用格式：（定义方法时使用）修饰符 返回值类型 方法名（数据类型...变量名）{}
+原理：可变参数底层是一个数组，根据传递参数个数不同，会创建不同长度的数组，来存储这些参数
+         传递的参数个数，可以是0个（不传递），1，2...多个
+注意事项：（1）一个方法的参数列表，只能有一个可变参数
+    	（2）如果方法的参数有多个，那么可变参数必须写在参数列表的末尾
+特殊写法：修饰符 返回值类型 方法名（Object...obj）{}
+
+19.Collectios工具类
+常用功能：
+（1）public static <T> boolean addAll(Collection<T> c , T ... elements)：往集合中添加一些元素
+（2）public static void shuffle(List <?> list)：打乱集合顺序
+（3）public static<T> void sort(List<T> list)：将集合中元素按照默认规则排序
+        使用前提：被排序的集合里边存储的元素，必须实现Comparable，重写接口中的方法compareTo定义排序的规则
+        排序规则：自己（this）-参数：升序
+（4）public static <T> void sort (List <T> list,Comparator<? super T>)：将集合中元素按照指定规则排序
+        Comparable和Comparator的区别：
+        Comparable：自己（this）和别人（参数）比较，自己需要实现Comparable接口，重写比较的规则compareTo方法
+                               排序规则：自己（this）-参数：升序
+        Comparator：相当于找一个第三方的裁判，比较两个（还可以进行组合式的排序）
+                               排序规则：o1-o2：升序
+
+20.Map接口的特点：
+1.Map集合是一个双列集合，一个元素包含两个值（一个key，一个value）
+2.Map集合中的元素，key和value的数据类型可以相同，也可以不同
+3.Map集合中的元素，key是不允许重复的，value是可以重复的
+4.Map集合中的元素，key和value是一一对应的
+
+21.Map接口的子类：
+1.HashMap：（1）底层是哈希表（数组+单向链表 或 数组+单向链表/红黑树）（2）无序集合，存/取的顺序可能不一致
+2.LinkedHashMap：（1）底层是哈希表+链表（保证迭代的顺序）（2）有序集合，存/取的顺序一致
+
+22.Map接口的常用方法：
+（1）public V put (K key ,V value):把指定的键与指定的值添加到Map集合中。
+（2）public V remove(Object key):把指定的键所对应的键值从Map集中移除。
+（3）public V get（Object key）：根据指定的键，在Map集合中获取对应的键
+（4）boolean containKey（Obeject key）：判断集合中是否包含指定的键。
+（5）public Set<K> keySet()：获取Map集合中所有的键，存储到Set集合中
+（6）public Set<Map,Entry<K,V>> entrySet():获取到Map集合中所有的键值对对象的集合（Set集合）
+
+23.Map集合的遍历键找值：
+（1）第一步：通过keySet（）方法返回一个<K>的Set集合
+（2）第二步：遍历Set<K>集合得到K值
+（3）第三步：通过get（）方法和K值访问V值。
+
+24.Map集合遍历键值对象：
+（1）第一步：通过entrySet（）方法返回一个<Map,Entry<K,V>>的Set集合
+（2）第二步：遍历Set<Map,Entry<K,V>集合得到Map.Entry<K,V>对象
+（3）第三步：使用Entry对象的getKey（）和getValue（）方法获取
+
+25.Hashtable集合
+（1）底层也是一个哈希表，是一个线程安全的集合，是单线程集合，速度慢
+（2）不可以存储null值，null键
+
+26.of方法：
+定义格式：public static <E> list<E> of(E... elements)
+使用前提：当集合中存储的元素个数已经确定，不再改变时使用
+注意：
+（1）of方法只适用于List接口、Set接口和Map接口，不适用于接口的实现类
+（2）of方法的返回值是一个不能改变的集合，集合不能再使用add，put方法，会抛出异常
+（3）Set集合、Map集合在调用of方法的时候，不能有重复元素，否则会抛出异常
