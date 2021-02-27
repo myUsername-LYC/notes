@@ -17,3 +17,4 @@
 
 5.问题：（1）compare   （2）Iterable<E>  （3）泛型  （4）注解
 
+6.idea里的project相当于eclipse里的workspace，而idea里的modules相当于eclipse里的project
