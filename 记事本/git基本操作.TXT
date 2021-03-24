@@ -1,0 +1,25 @@
+1.本地仓库上的操作
+git config --global user.name "your name"  //配置用户名
+git config --global userr.email "your email" //配置用户邮箱
+
+git init //初始化git仓库
+
+git status //查看文件状态
+git add . //添加当前目录所有文件到暂存区
+git add 文件名1 文件名2 ... //添加多个文件到暂存区
+git add [dir]  //添加某个目录的文件到暂存区
+git commit -m "注释"  //将暂存区的文件提交到本地仓库
+git log //查看提交的信息,可以通过此功能获取想要返回的版本编号
+git reset --hard 版本编号  //通过版本编号回到该版本
+git reflog //查看操作记录
+
+git clone github链接 // 在本地克隆链接对应的远程仓库
+git pull // 拉取远程仓库的最新版本
+git push //将本地仓库提交到远程仓
+
+
+git branch //查看分支
+git branch 分支名称 //创建分支
+git checkout 分支名称 //切换分支
+git merge 分支名称 //融合分支
+git branch -d 分支名称 //删除分支(先合并分支才允许被删除) (-D 大写强制删除)
