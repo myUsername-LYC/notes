@@ -1,0 +1,20 @@
+1.字段可以认为是我们在类中定义的成员变量，属性是字段加上get/set方法，属性值通过get/set方法来控制
+
+2.Object类中的equals方法比较的是引用的是否是同一个对象，如果引用的不是同一个对象，就算其内容一样
+也会返回false，所以大多数类都会重写equals方法和hashCode方法
+
+3.Java语言定义了public、protected、private、abstract、static和final这6常用修饰词外，
+还定义了5个不太常用的修饰词（native、strictfp、synchronized、volatile、transient）。
+
+4.	访问控制修饰符 	当前类	同包	子类	其他包
+	public		√	√	√	√
+   	protected		√	√	√	×
+	（default）	√	√	×	×
+	private		√	×	×	×
+注意：
+（1）Java中外部类的修饰只能是public或默认，类的成员（包括内部类）的修饰可以是以上四种
+（2）受保护（protected）对子类相当于公开，对不是同一包中的没有父子关系的类相当于私有。
+
+5.问题：（1）compare   （2）Iterable<E>  （3）泛型  （4）注解
+
+6.idea里的project相当于eclipse里的workspace，而idea里的modules相当于eclipse里的project
