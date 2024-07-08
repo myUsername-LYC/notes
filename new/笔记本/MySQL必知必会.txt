@@ -1,0 +1,116 @@
+主要内容
+一、数据库系统的概念
+    1.数据库管理系统
+    2.关系型数据
+    3.MySQL的安装
+二、MySQL查询语句
+    1.简单查询 select、from关键字
+        （1）可以查询哪些东西
+        （2）命别名
+        （3）常用函数
+    2.条件查询 where关键字
+        （1）逻辑运算符
+        （2）常用关键字
+        （3）正则表达式匹配
+        （4）使用全文搜索索引
+    3.分组查询和筛选分组信息 group by、having关键字
+        （1）聚合函数
+    4.排序order by关键字
+        （1）排序类型
+        （2）使用特殊的校对规则
+    5.子查询
+        （1）按种类区分
+            相关子查询、非相关子查询
+        （2）按使用位置区分
+            作为表联结
+            作为条件筛选
+    6.表联结
+        （1）建立联结时要注意规定联结的条件
+        （2）内联结 inner join ... on ...
+        （3）外联结 left join ... on ... ， right join ... on
+    7.联合查询（union）
+        （1）一条语句从多张表结构类似的表查询
+        （2）从一张表中使用不同的条件做查询
+三、MySQL增删改语句
+    1.insert into tableName 添加行
+        （1）尽量写上要填充的列
+        （2）可以使用子查询
+    2.update tableName 更新行
+        （1）记得使用where描述更新条件，否则更新表的全部行
+        （2）可以使用子查询
+    3.delete from tableName 删除行
+         同update类似
+四、MySQL管理表语句
+    1.create table tableName（） 创建表
+        （1）列的数据类型有哪些
+            I.串类型 varchar, cahr， text
+            II.数值类型 tinyint,int,... double decemel
+            III.日期类型 date， time，datetime， timestamp
+            Iv.二进制类型 blob
+        （2）约束类型
+            I.主键约束 primary key
+            II.唯一约束 unique 
+            III.非空约束 not null
+            IV.默认值
+            V.外键约束
+            VI.自增列
+        （3）设置表的存储引擎，字符集类型，校对规则
+    2.alter table tableName 更新表
+        （1）modify column 修改列的信息，包括修改约束，列的数据类型等
+        （2）change column 改列名等
+        （3）rename to 改表名
+    3.drop table tableName 删除表
+五、使用视图
+    1.create view viewName as [select 语句] 创建视图
+        （1）视图可以看作一种特殊的表，可直接用于查询，也可修改（符合条件的情况下）
+        （2）视图可能会影响性能
+    2.在MySQL不能确定视图的基数据时，不能对视图更新，
+    3.使用drop view viewName 删除视图
+六、存储过程
+    1.create procedure procedureName（paramName1,...,paramNameN ）begin ... end
+        （1）存储过程是一组sql语句的集合，包含变量定义和赋值，流程控制等
+        （2）参数类型有in，out，inout
+        （3）流程控制
+            条件控制
+            循环控制
+    2.call procedureName（）调用存储过程
+    3.drop procedure procedureName 删除存储过程
+七、使用游标
+    1.declare cursorName cursor for select ... 创建游标
+        （1）MySQL的游标只能在存储过程中使用
+        （2）创建游标并没有检索数据，只是定义了一条select语句
+        （3）使用前需要打开游标，使用完之后需要关闭游标
+    2.open cursorName 打开游标
+    3.fetch cursorName 使用游标数据
+    4.close cursorName 关闭游标
+八、使用触发器
+    1.create trigger triggerName (before | after) (insert | update | delete) on tableName 
+    [for each row] [sql语句 ...]
+        （1）每个表最多有6个触发器
+        （2）在不同类型的触发器语句中可以使用不同的虚拟表数据
+            I.insert可以通过虚拟表new使用insert的行数据
+            II.delete可以通过虚拟表old使用被删除的行数据 
+            III.update可以通过new使用被更新的行新数据，old使用被更新的行旧数据
+    2.使用drop trigger triggerName 删除触发器，触发器不能被覆盖，只能删除之后重新创建
+九、MySQL事务管理
+    1.事务基本概念
+        （1）系统变量autocommit表示自动提交， off-关闭 on-开启（默认）
+        （2）通过 设置autocommit=false 或者 使用关键字 start transation 开始手动提交事务
+        （3）使用commit提交事务
+        （4）使用rollback回滚事务
+        （5）使用savepoint [pointName] 保存回滚点， 通过 rollback to pointName 回滚
+    2.事务的隔离级别
+        （1）read uncommited
+            可以读到未提交的数据，存在脏读、幻读、不可重复读的问题
+        （2）read committed
+            只能读到已提交的数据，存在不可重复读、幻读的问题
+        （3）repeatable read（默认）
+            只能读到已提交的数据，并且解决了不可重复读的问题，还存在幻读的问题
+        （4）serializable
+十、安全管理
+    1.用户管理
+    2.用户权限管理
+十一、数据库维护
+    1.使用mysqldump命令数据库备份
+        （1）mysqldump -u username -p password --databases databaseName1 ... > fileName.sql
+    
